@@ -1,8 +1,9 @@
 from .Tarefa import Tarefa
+from .Disciplina import Disciplina
 from datetime import datetime
 
 class TarefaEscolar(Tarefa):
-    def __init__(self, nome_tarefa, disciplina, peso=0, descricao=None, data_realizaca=None, data_entrega=None):
+    def __init__(self, nome_tarefa, disciplina: Disciplina, peso=0, descricao=None, data_realizaca=None, data_entrega=None):
         super().__init__(nome_tarefa, descricao, data_realizaca)
         self.__disciplina = disciplina
         # Construtor do TarefaEscolar não usa o setter de peso
@@ -17,11 +18,11 @@ class TarefaEscolar(Tarefa):
     
     # getter e setters:
     @property
-    def disciplina(self):
+    def disciplina(self) -> Disciplina:
         return self.__disciplina
     
     @disciplina.setter
-    def disciplina(self, disciplina):
+    def disciplina(self, disciplina: Disciplina):
         self.__disciplina = disciplina
         
     @property
@@ -60,3 +61,9 @@ class TarefaEscolar(Tarefa):
         if(self.peso!=0):
             txt += f"\n Peso: {self.peso}"
         return txt 
+    
+    def definir_termino(self):
+        self.data_realizacao = datetime.now()
+        if(self.data_realizacao > self.data_entrega):
+            str_desc = f"{self.descricao} [Entrega em atraso]" if self.descricao else "[Entrega em atraso]"
+            self.descricao = str_desc
