@@ -1,10 +1,11 @@
 from .Tarefa import Tarefa
 from .Disciplina import Disciplina
+from .StatusTarefa import StatusTarefa
 from datetime import datetime
 
 class TarefaEscolar(Tarefa):
-    def __init__(self, nome_tarefa, disciplina: Disciplina, peso=0, descricao=None, data_realizaca=None, data_entrega=None):
-        super().__init__(nome_tarefa, descricao, data_realizaca)
+    def __init__(self, nome_tarefa, disciplina: Disciplina, peso=0, descricao=None, data_realizaca=None, data_entrega=None, status = StatusTarefa.A_FAZER):
+        super().__init__(nome_tarefa, descricao, data_realizaca, status)
         self.__disciplina = disciplina
         # Construtor do TarefaEscolar não usa o setter de peso
         self.peso = peso ## 1. como usar o peso definido no setter? - atributo público, quando possui setter definido na classe, ele utiliza o setter, caso contrário fica acesso livre sem validação.

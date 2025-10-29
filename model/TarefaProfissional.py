@@ -1,9 +1,10 @@
 from .Tarefa import Tarefa
+from .StatusTarefa import StatusTarefa
 from datetime import datetime
 
 class TarefaProfissional(Tarefa):
-    def __init__(self, titulo, projeto, data_entrega, descricao=None):
-        super().__init__(titulo, descricao=descricao)
+    def __init__(self, titulo, projeto, data_entrega, descricao=None, status = StatusTarefa.A_FAZER):
+        super().__init__(titulo, descricao=descricao, status=status)
         self.projeto = projeto
         self.data_entrega = data_entrega
 

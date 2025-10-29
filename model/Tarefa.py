@@ -1,14 +1,16 @@
 from datetime import datetime
 from abc import ABC, abstractmethod
+from .StatusTarefa import StatusTarefa
 
 class Tarefa(ABC):
-    def __init__(self, nome_tarefa, descricao=None, data_realizacao=None):
+    def __init__(self, nome_tarefa, descricao=None, data_realizacao=None, status = StatusTarefa.A_FAZER):
         self.nome = nome_tarefa
         self.__concluido = False
         self.__descricao = descricao
         self.__data_realizacao = None   # inicializa
         if data_realizacao: # se tiver valor, atualiza
             self.data_realizacao = data_realizacao 
+        self.status = status
     
     
     ## encapsulamento: getter e setter
@@ -51,16 +53,17 @@ class Tarefa(ABC):
     
     ## outros métodos
     def concluir(self):
-        self.__concluido = True   
+        self.__concluido = True
+        self.status = StatusTarefa.CONCLUIDA   
         self.definir_termino() 
     
-    
+    def iniciarTarefa(self):
+        self.status = StatusTarefa.EM_ANDAMENTO
     
     
     
     def __str__(self):
-        status = "CONCLUIDO" if self.__concluido == True else "A FAZER"
-        return f"{self.__nome} [{status}]"
+        return f"{self.__nome} [{self.status.value}]"
     
     def __eq__(self, outro):
         if(self.nome == outro.nome and self.data_realizacao == outro.data_realizacao):
@@ -71,10 +74,9 @@ class Tarefa(ABC):
 
     @abstractmethod
     def exibir_dados(self):
-        status = "CONCLUÍDO" if self.__concluido else "A FAZER"
         descricao = f"Descrição: {self.descricao}\n" if self.descricao else ""
         data = f"{self.data_realizacao.strftime('%d-%m-%Y')}" if self.data_realizacao else "Sem data definida"
-        return f"Tarefa cadastrada:\n {self.nome} [{status}]\n {descricao} Data Prevista: {data}"
+        return f"Tarefa cadastrada:\n {self.nome} [{self.status.value}]\n{descricao}Data Realização: {data}"
 
     @abstractmethod
     def definir_termino(self):

@@ -14,29 +14,32 @@ print("Nome validado pelo construtor: "+d1.nome)
 d1.nome = "   tecnologia de Orientação à Objetos"
 print("Nome validado pelo setter: "+d1.nome)
 
-t4 = TarefaEscolar("introducao Herança", d1, -1)
-t4.data_entrega = "19-09-2025"
+tEscolar = TarefaEscolar("introducao Herança", d1, -1)
+tEscolar.data_entrega = "19-09-2025"
+tEscolar.iniciarTarefa()
+print(f"Tarefa Escolar:\n {tEscolar.exibir_dados()}")
+print("\n\n")
 
-print(f"Tarefa Escolar:\n {t4.exibir_dados()}")
-
-
-tp = TarefaProfissional(
+tProfissional = TarefaProfissional(
         titulo="Documentar sistema",
         projeto="ERP Interno",
         data_entrega="15-10-2025",
         descricao="Criar documentação técnica do módulo financeiro"
     )
 
-print(tp)
-print(tp.exibir_dados())
+print(tProfissional)
+print(tProfissional.exibir_dados())
 
-
+print("\n\n")
 tpessoal = TarefaPessoal(
         titulo="Fazer caminhada",
         tipo="Saúde",
         descricao="Caminhar 30 minutos na gare",
         data_realizacao="09-10-2025"
     )
+tpessoal.concluir()
 
-print(tpessoal)
+#print(tpessoal)
 print(tpessoal.exibir_dados())
+
+print("\n\n")
